@@ -10,7 +10,9 @@ def cors_options_view(context, request):
     response.headers.update(cors)
 
     if not cors.get('Access-Control-Allow-Origin', None):
-        if cors.get('Access-Control-Allow-Credentials', None) == 'true':
+        if (cors.get('Access-Control-Allow-Credentials', None) == 'true' and
+            request.headers.get('Origin', None)):
+            # test comment
             response.headers['Access-Control-Allow-Origin'] = request.headers['Origin']
         else:
             response.headers['Access-Control-Allow-Origin'] = '*'

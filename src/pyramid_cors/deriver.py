@@ -5,7 +5,8 @@ def get_cors_headers(request):
     headers = cors.copy()
     # no predefined allow-origin
     if not cors.get('Access-Control-Allow-Origin', None):
-        if cors.get('Access-Control-Allow-Credentials') == 'true':
+        if (cors.get('Access-Control-Allow-Credentials') == 'true' and
+            request.headers.get('Origing', None)):
             headers['Access-Control-Allow-Origin'] = request.headers['Origin']
         else:
             headers['Access-Control-Allow-Origin'] = '*'
