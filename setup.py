@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-version = '0.1'
+version = '0.2.0'
 
 setup(
     name='pyramid_cors',
@@ -35,6 +35,8 @@ setup(
     ],
     extras_require={
         'test': [
+            'pytest',
+            'pytest-cov',
         ],
     }
 )
