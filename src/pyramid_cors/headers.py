@@ -1,6 +1,9 @@
 
 
 def get_cors_headers(request):
+    if not request.headers.get('Origin'):
+        # not a CORS request, don't return any CORS headers
+        return {}
     headers = request.registry.settings.get('cors.headers', {}).copy()
     allow_origin = get_allow_origin(request, headers)
 

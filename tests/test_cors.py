@@ -125,3 +125,12 @@ class TestCORS(unittest.TestCase):
         response = request.get_response(app)
         self.assertNotIn('Access-Control-Allow-Methods', response.headers)
         self.assertNotIn('Access-Control-Allow-Origin', response.headers)
+
+    def test_no_origin(self):
+        origin = 'http://example.com'
+        app = self.config.make_wsgi_app()
+        request = Request.blank('/cors', base_url=origin)
+        request.method = 'POST'
+        response = request.get_response(app)
+        self.assertNotIn('Access-Control-Allow-Methods', response.headers)
+        self.assertNotIn('Access-Control-Allow-Origin', response.headers)
